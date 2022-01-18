@@ -10,3 +10,55 @@
     import 'relative/path/to/stylesheet.scss';
 
 */
+
+.TrafficHead {
+    height: 100px;
+    width: 40px;
+    background-color: black;
+}
+
+.TrafficBody {
+    background-color: black;
+}
+
+.light {
+    height: 180px;
+    width: 180px;
+    border-radius: 100%;
+}
+
+.red {
+    background-color: red;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.green {
+    background-color: green;
+}
+
+.purple {
+    background-color: purple;
+}
+
+.selected-red {
+    box-shadow: 0px 0px 40px 40px red;
+    z-index: 1;
+}
+
+.selected-yellow {
+    box-shadow: 0px 0px 40px 40px yellow;
+    z-index: 1;
+}
+
+.selected-green {
+    box-shadow: 0px 0px 40px 40px green;
+    z-index: 1;
+}
+
+.selected-purple {
+    box-shadow: 0px 0px 40px 40px purple;
+    z-index: 1;
+}
