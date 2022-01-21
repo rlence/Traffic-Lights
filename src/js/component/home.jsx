@@ -10,17 +10,13 @@ const Home = () => {
 		green: "",
 		purple: "",
 	});
+	const [displayToggle, setDisplayToggle] = useState("d-none");
 
-	const HandleClick = (event) => {
+	const handleClick = (event) => {
 		const newColors = {
 			[event.target.id]: `selected-${event.target.id}`,
 		};
 		setColor(newColors);
-	};
-
-	const [displayToggle, setDisplayToggle] = useState("d-none");
-	const displayPurple = () => {
-		setDisplayToggle(displayToggle == "d-none" ? "block" : "d-none");
 	};
 
 	const [cycle, setCycle] = useState({
@@ -30,21 +26,25 @@ const Home = () => {
 		purple: "",
 	});
 
+	const [listColors] = useState(Object.keys(color));
+
+	const displayPurple = () => {
+		setDisplayToggle(displayToggle == "d-none" ? "block" : "d-none");
+	};
+
+	let count = 0;
+
 	const toggleCycle = () => {
-		let i = 0;
-		setInterval(() => {
-			const colors = Object.keys(cycle);
-			cycle[colors[i]] = `selected-${colors[i]}`;
-			if (i > 0) {
-				cycle[colors[i - 1]] = "";
-				i == 3 ? (i = 0) : i++;
-			} else if (i == 0) {
-				cycle[colors[3]] = "";
-				i++;
+		const interval = setInterval(() => {
+			if (count === listColors.length - 1) {
+				count = 0;
+			} else {
+				const colorName = listColors[count];
+				setColor({ ...color, [colorName]: `selected-${colorName}` });
+				count++;
 			}
-			console.log(cycle);
-			setCycle(cycle);
 		}, 1000);
+		return () => clearInterval(interval);
 	};
 
 	return (
@@ -52,7 +52,7 @@ const Home = () => {
 			<div className="TrafficHead"></div>
 			<div
 				id="trafficLight"
-				onClick={HandleClick}
+				onClick={handleClick}
 				className="TrafficBody p-4">
 				<Lights color="red" class={color.red} cycleClass={cycle.red} />
 				<Lights
